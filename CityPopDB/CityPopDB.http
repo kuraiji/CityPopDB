@@ -1,6 +1,3 @@
 @CityPopDB_HostAddress = http://localhost:5095
 
-GET {{CityPopDB_HostAddress}}/weatherforecast/
-Accept: application/json
-
 ###

@@ -1,4 +1,5 @@
 using CityPopDB.Data;
+using CityPopDB.Services.UserService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(options => 
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+builder.Services.AddScoped<IUserService, UserService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
