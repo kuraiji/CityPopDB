@@ -7,7 +7,7 @@ public interface IArtistService
 {
     Task<string> Post(DataContext context, ArtistPostDto request);
     Task<ArtistGetDto> Get(DataContext context, int id);
-    Task<List<ArtistGetSomeDto>> GetSome(DataContext context, string filter, bool isDesc, int items, string lastName);
+    Task<List<ArtistGetSomeDto>> GetSome(DataContext context, string? filter, int page, int items, bool isDesc);
     Task<string> Delete(DataContext context, int id);
     Task<ArtistPostDto> Put(DataContext context, ArtistPutDto request);
 }

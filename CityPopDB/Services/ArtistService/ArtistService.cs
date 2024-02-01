@@ -1,7 +1,7 @@
+using System.Diagnostics.CodeAnalysis;
 using CityPopDB.Data;
 using CityPopDB.DTOs;
 using CityPopDB.Entities;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace CityPopDB.Services.ArtistService;
@@ -31,11 +31,12 @@ public class ArtistService : IArtistService
         };
     }
 
-    public async Task<List<ArtistGetSomeDto>> GetSome(DataContext context, string filter, bool isDesc, int items, string lastName)
+    [SuppressMessage("ReSharper", "CA1862")]
+    public async Task<List<ArtistGetSomeDto>> GetSome(DataContext context, string? filter, int page = 0, int items = 50, bool isDesc = false)
     {
         
-        
-        var artists = from artist in context.Artists.Include(artist => artist.Albums)
+        //var artists = from artist in context.Artists.Include(artist => artist.Albums)
+        var artists = from artist in context.Artists
                                                 select new ArtistGetSomeDto
                                                 {
                                                     Name = artist.Name
@@ -43,13 +44,9 @@ public class ArtistService : IArtistService
         artists = isDesc ? 
             artists.OrderByDescending(a => a.Name) : 
             artists.OrderBy(a => a.Name);
-
-
-        if (!string.IsNullOrWhiteSpace(filter)) artists = artists.Where(a => a.Name.Contains(filter));
-        if (!string.IsNullOrWhiteSpace(lastName))
-            artists = artists.Where(a => isDesc ? 
-                string.Compare(a.Name, lastName, StringComparison.Ordinal) < 0 : 
-                string.Compare(a.Name, lastName, StringComparison.Ordinal) > 0);
+        if (!string.IsNullOrWhiteSpace(filter)) 
+            artists = artists.Where(a => a.Name.ToLower().Contains(filter.ToLower()));
+        artists = artists.Skip(items * int.Max(page, 0));
         artists = artists.Take(int.Min(items, 50));
         return await artists.ToListAsync();
     }
