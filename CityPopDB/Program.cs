@@ -1,6 +1,7 @@
 using CityPopDB.Data;
 using CityPopDB.Services.AlbumService;
 using CityPopDB.Services.ArtistService;
+using CityPopDB.Services.VoteService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 );
 builder.Services.AddScoped<IArtistService, ArtistService>();
 builder.Services.AddScoped<IAlbumService, AlbumService>();
+builder.Services.AddScoped<IVoteService, VoteService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

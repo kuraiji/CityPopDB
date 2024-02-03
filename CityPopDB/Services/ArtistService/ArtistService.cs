@@ -23,11 +23,17 @@ public class ArtistService : IArtistService
     {
         var artist = await context.Artists.Include(artist => artist.Albums).FirstOrDefaultAsync(artist => artist.Id == id);
         if (artist == null) throw new Exception("Artist Not Found");
+        var albums = (artist.Albums ?? []).Select(album => new AlbumGetSomeDto
+        {
+            AlbumName = album.Name,
+            ArtistName = artist.Name,
+            ImageLink = album.ImageLink
+        });
         return new ArtistGetDto
         {
             Name = artist.Name,
             ImageLink = artist.ImageLink,
-            Albums = artist.Albums ?? []
+            Albums = albums.ToList()
         };
     }
 

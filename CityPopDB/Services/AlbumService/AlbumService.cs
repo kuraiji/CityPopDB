@@ -43,7 +43,8 @@ public class AlbumService : IAlbumService
             select new AlbumGetSomeDto
             {
                 ArtistName = album.AlbumArtist.Name,
-                AlbumName = album.Name
+                AlbumName = album.Name, 
+                ImageLink = album.ImageLink
             };
         albums = isDesc ? 
             albums.OrderByDescending(a => a.AlbumName) : 
