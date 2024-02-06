@@ -1,0 +1,18 @@
+<mat-toolbar class="toolbar">
+  <a class="logo" target="_self" routerLink="">City Pop DB</a>
+  <a mat-button target="_self" routerLink="artists">Artists</a>
+  <a mat-button target="_self" routerLink="albums">Albums</a>
+  <button mat-mini-fab color="primary" aria-label="User" [matMenuTriggerFor]="menu">
+    <mat-icon>person</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>login</mat-icon>
+      Log-in
+    </button>
+    <button mat-menu-item>
+      <mat-icon>person_add_alt_1</mat-icon>
+      Sign-up
+    </button>
+  </mat-menu>
+</mat-toolbar>

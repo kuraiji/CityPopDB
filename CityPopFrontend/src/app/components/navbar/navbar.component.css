@@ -1,0 +1,36 @@
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5rem 1rem;
+}
+
+a {
+  color: whitesmoke;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.logo {
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, deepskyblue 0%, skyblue 50%, lightskyblue 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
